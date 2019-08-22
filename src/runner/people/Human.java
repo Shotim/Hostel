@@ -5,7 +5,7 @@ public abstract class Human {
     private static int lastID;
     public boolean pass;
 
-    public Human(){
+    public Human() {
         setId();
     }
 

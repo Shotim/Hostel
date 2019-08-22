@@ -16,7 +16,7 @@ public class Student extends Human {
         this.theRoomNumber = theRoomNumber;
     }
 
-    public Student(){
+    public Student() {
         super();
         settleInHostel();
     }

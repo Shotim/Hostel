@@ -3,11 +3,15 @@ package runner.people.staff;
 import runner.people.roomers.Student;
 
 public class FloorWarden extends Student {
-    FloorWarden(){
+    FloorWarden() {
         super();
     }
 
-    FloorWarden appointAWarden(Student student){
+    FloorWarden appointAWarden(Student student) {
         return (FloorWarden) student;
+    }
+
+    Student dismiss() {
+        return this;
     }
 }
