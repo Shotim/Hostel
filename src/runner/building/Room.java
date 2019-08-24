@@ -1,35 +1,40 @@
 package runner.building;
 
 import runner.people.roomers.Student;
+import runner.people.staff.Commandant;
 
 import java.util.ArrayList;
 
 public class Room {
-    private static int lastRoomNumber;
     private final static int MAX_ROOM_CAPACITY = 3;
-    private ArrayList<Student> roomers = new ArrayList<Student>();
-    private int cleanStatus;
-    int number;
+    public ArrayList<Student> roomers = new ArrayList<Student>();
+    private boolean cleanStatus;
+    public int number;
+    public int floor;
 
-    Room() {
-        int course = 1;
+    Room(Floor floor, int roomNumber) {
         for (int i = 0; i < MAX_ROOM_CAPACITY; i++) {
-            roomers.add(new Student(course, this.number));
+            this.roomers.add(new Student(this));
         }
-        this.cleanStatus = 5;
-        lastRoomNumber++;
-        this.number = lastRoomNumber;
+        this.cleanStatus = true;
+        this.number = roomNumber;
+        this.floor=floor.floorNumber;
     }
 
-    void settleTheStudent(Student student) {
+    public void settleTheStudent(Student student) {
+        Commandant.approveCheckIn(student);
         this.roomers.add(student);
     }
 
-    void freeTheBed(Student student) {
+    public void freeTheBed(Student student) {
         this.roomers.remove(student);
     }
 
     boolean isSettled() {
         return roomers.size() == MAX_ROOM_CAPACITY;
+    }
+
+    public boolean isClean() {
+        return this.cleanStatus;
     }
 }

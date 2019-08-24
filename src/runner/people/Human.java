@@ -6,15 +6,23 @@ public abstract class Human {
     public boolean pass;
 
     public Human() {
-        setId();
+        setNewId();
     }
 
-    void setId() {
+    public Human(Human human) {
+        setId(human.getId());
+    }
+
+    public void setNewId() {
         lastID++;
         this.id = lastID;
     }
 
-    int getId() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
         return this.id;
     }
 }
