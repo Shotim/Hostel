@@ -14,13 +14,18 @@ public class Student extends Human {
     public int amountOfRemarks;
     public boolean isExpelled;
     public boolean paidForAccommodation;
-    public int theRoomNumber;
-    public int theFloorNumber;
+    private int theRoomNumber;
+    private int theFloorNumber;
     public int yearOfLiving;
 
     public Student(Room room) {
         super();
         newRoomer(room);
+        studentInfo();
+    }
+
+    public void studentInfo() {
+        System.out.println("id: " + this.getId() + "\ncourse: " + this.course + "\nyears of living: " + this.yearOfLiving + "\nfloor: " + this.theFloorNumber + "\nroom: " + this.theRoomNumber + "\n\n");
     }
 
     public Student(Student student) {
@@ -40,7 +45,7 @@ public class Student extends Human {
         Commandant.approveCheckIn(this);
     }
 
-    public void settleInHostel() {
+    private void settleInHostel() {
         this.isExpelled = false;
         this.pass = true;
         payForAccommodation();
@@ -48,8 +53,7 @@ public class Student extends Human {
     }
 
     public FloorWarden appointAWarden() {
-        FloorWarden warden = new FloorWarden(this);
-        return warden;
+        return new FloorWarden(this);
     }
 
     public void raiseTheCourse() {
@@ -60,11 +64,11 @@ public class Student extends Human {
         this.isExpelled = true;
     }
 
-    public void payForAccommodation() {
+    private void payForAccommodation() {
         this.paidForAccommodation = true;
     }
 
-    public void removeRemarks() {
+    private void removeRemarks() {
         amountOfRemarks = 0;
     }
 
@@ -72,14 +76,11 @@ public class Student extends Human {
         amountOfRemarks++;
     }
 
-    public void evict(Floor floor, Room room, FloorWarden floorWarden) {
+    public boolean evict(Floor floor) {
         Commandant.approveEviction(this);
-        room.freeTheBed(this);
         SecurityGuard.helpEvict(this);
         System.out.println("the " + this.getId() + "-th student is living because he " + this.causeOfEviction());
-        if (this.getId() == floorWarden.getId()) {
-            floorWarden.newFloorWarden(floor.floor);
-        }
+        return this.getId()==floor.warden.getId();
     }
 
     private String causeOfEviction() {

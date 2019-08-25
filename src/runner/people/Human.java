@@ -1,9 +1,14 @@
 package runner.people;
 
-public abstract class Human {
+public class Human {
     private int id;
     private static int lastID;
     public boolean pass;
+
+    public Human(String str) {
+        this.id = 0;
+        this.pass = (int) (2 * Math.random()) != 0;
+    }
 
     public Human() {
         setNewId();
@@ -11,6 +16,7 @@ public abstract class Human {
 
     public Human(Human human) {
         setId(human.getId());
+        this.pass = human.pass;
     }
 
     public void setNewId() {

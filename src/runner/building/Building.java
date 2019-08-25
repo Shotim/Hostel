@@ -2,19 +2,27 @@ package runner.building;
 
 public class Building {
     public Floor[] building;
-    public int floorAmount;
-    public int roomAmountOnTheFloor;
+    int floorAmount;
+    int roomAmountOnTheFloor;
 
-    Building(int floorAmount, int roomAmount) {
+    public Building(int floorAmount, int roomAmountOnTheFloor) {
         this.building = new Floor[floorAmount];
-        this.floorAmount=floorAmount;
-        this.roomAmountOnTheFloor=roomAmount;
+        this.floorAmount = floorAmount;
+        this.roomAmountOnTheFloor = roomAmountOnTheFloor;
+        for (int floorCounter = 0; floorCounter < floorAmount; floorCounter++) {
+            this.building[floorCounter] = new Floor(this, floorCounter);
+        }
     }
 
-    void checkIn() {
-        for (int floorCounter = 0; floorCounter < this.floorAmount; floorCounter++) {
-            this.building[floorCounter] = new Floor(this, floorCounter);
-            this.building[floorCounter].checkIn(this);
+    public void showRoomers() {
+        for (Floor floor : this.building) {
+            floor.showRoomers();
+        }
+    }
+
+    public void roomCleaning() {
+        for (Floor floor : this.building) {
+            floor.roomCleaning();
         }
     }
 }
