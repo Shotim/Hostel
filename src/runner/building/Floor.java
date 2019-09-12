@@ -1,13 +1,15 @@
 package runner.building;
 
+import runner.people.roomers.Student;
 import runner.people.staff.FloorWarden;
 
 public class Floor {
+
     public Room[] floor;
-    int floorNumber;
+    public int floorNumber;
     public FloorWarden warden;
 
-    Floor(Building building, int floorNumber) {
+    public Floor(Building building, int floorNumber) {
         this.floor = new Room[building.roomAmountOnTheFloor];
         this.floorNumber = floorNumber;
         for (int roomCounter = 0; roomCounter < building.roomAmountOnTheFloor; roomCounter++) {
@@ -16,15 +18,23 @@ public class Floor {
         }
     }
 
-    void showRoomers() {
+    public void showRoomers() {
         for (Room room : this.floor) {
             room.showRoomers();
         }
     }
 
-    void roomCleaning() {
+    public void roomCleaning() {
         for (Room room : this.floor) {
-            room.Cleaning();
+            room.cleaning();
+        }
+    }
+
+    public void evictStudents(){
+        for (Room room : this.floor) {
+            if (room.roomers.size() != 0) {
+                room.evictStudents(this);
+            }
         }
     }
 }

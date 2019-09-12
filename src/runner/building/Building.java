@@ -1,9 +1,10 @@
 package runner.building;
 
 public class Building {
+
     public Floor[] building;
-    int floorAmount;
-    int roomAmountOnTheFloor;
+    private int floorAmount;
+    public int roomAmountOnTheFloor;
 
     public Building(int floorAmount, int roomAmountOnTheFloor) {
         this.building = new Floor[floorAmount];

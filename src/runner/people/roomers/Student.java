@@ -72,7 +72,7 @@ public class Student extends Human {
         amountOfRemarks = 0;
     }
 
-    public void getRemark() {
+    public void receiveRemark() {
         amountOfRemarks++;
     }
 
@@ -80,20 +80,17 @@ public class Student extends Human {
         Commandant.approveEviction(this);
         SecurityGuard.helpEvict(this);
         System.out.println("the " + this.getId() + "-th student is living because he " + this.causeOfEviction());
-        return this.getId()==floor.warden.getId();
+        return this.getId() == floor.warden.getId();
     }
 
     private String causeOfEviction() {
         if (this.course > MAX_COURSE) {
             return "was graduated";
-        }
-        if (this.amountOfRemarks == MAX_REMARKS) {
+        } else if (this.amountOfRemarks == MAX_REMARKS) {
             return "received too much remarks";
-        }
-        if (this.isExpelled) {
+        } else if (this.isExpelled) {
             return "was expelled from university";
-        }
-        if (!this.paidForAccommodation) {
+        } else if (!this.paidForAccommodation) {
             return "doesn't pay for accommodation";
         }
         return "";

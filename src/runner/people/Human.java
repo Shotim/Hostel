@@ -1,6 +1,7 @@
 package runner.people;
 
 public class Human {
+
     private int id;
     private static int lastID;
     public boolean pass;

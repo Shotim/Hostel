@@ -4,15 +4,17 @@ import runner.people.roomers.Student;
 import runner.people.staff.Commandant;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Room {
+
     private final static int MAX_ROOM_CAPACITY = 3;
-    public ArrayList<Student> roomers = new ArrayList<Student>();
+    public List<Student> roomers = new ArrayList<Student>();
     private boolean cleanStatus;
     public int number;
     public int floor;
 
-    Room(Floor floor, int roomNumber) {
+    public Room(Floor floor, int roomNumber) {
         this.cleanStatus = true;
         this.number = roomNumber;
         this.floor = floor.floorNumber;
@@ -27,7 +29,7 @@ public class Room {
         this.roomers.add(student);
     }
 
-    boolean isSettled() {
+    public boolean isSettled() {
         return roomers.size() == MAX_ROOM_CAPACITY;
     }
 
@@ -35,7 +37,7 @@ public class Room {
         return this.cleanStatus;
     }
 
-    void showRoomers() {
+    public void showRoomers() {
         if (this.roomers.size() != 0) {
             for (Student roomer : this.roomers) {
                 roomer.studentInfo();
@@ -43,7 +45,15 @@ public class Room {
         }
     }
 
-    void Cleaning() {
+    public void cleaning() {
         this.cleanStatus = Math.random() > 0.5;
+    }
+
+    public void evictStudents(Floor floor){
+        for (Student roomer : this.roomers) {
+            if (roomer.isExpelled || roomer.amountOfRemarks == Student.MAX_REMARKS || roomer.course > Student.MAX_COURSE) {
+                roomer.evict(floor);
+            }
+        }
     }
 }

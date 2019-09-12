@@ -2,14 +2,13 @@ package runner;
 
 import runner.building.Building;
 import runner.building.Floor;
-import runner.building.Room;
 import runner.people.Human;
-import runner.people.roomers.Student;
 import runner.people.staff.SecurityGuard;
 import runner.university.University;
 import scanner.EnterFromConsole;
 
 public class Hostel {
+
     private static int month = 0;
     private static final int END_OF_SEMESTER = 4;
     private static final int END_OF_COURSE = 2 * END_OF_SEMESTER;
@@ -18,11 +17,9 @@ public class Hostel {
     public static void main(String[] args) {
         Building building = start();
         building.showRoomers();
-        monthRoutine(building);
-        monthRoutine(building);
-        monthRoutine(building);
-        monthRoutine(building);
-        monthRoutine(building);
+        for (int i = 0; i < 5; i++) {
+            monthRoutine(building);
+        }
     }
 
     private static Building start() {
@@ -64,15 +61,7 @@ public class Hostel {
 
     private static void evictStudents(Building building) {
         for (Floor floor : building.building) {
-            for (Room room : floor.floor) {
-                if (room.roomers.size() != 0) {
-                    for (Student roomer : room.roomers) {
-                        if (roomer.isExpelled || roomer.amountOfRemarks == Student.MAX_REMARKS || roomer.course > Student.MAX_COURSE) {
-                            roomer.evict(floor);
-                        }
-                    }
-                }
-            }
+            floor.evictStudents();
         }
     }
 }

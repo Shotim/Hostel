@@ -4,6 +4,7 @@ import runner.people.Human;
 import runner.people.roomers.Student;
 
 public class SecurityGuard extends Human {
+
     public static void checkPass(Human human) {
         if (human.pass) {
             System.out.println("Outsider tried to come in!");

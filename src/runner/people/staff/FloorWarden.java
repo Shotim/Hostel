@@ -16,7 +16,7 @@ public class FloorWarden extends Student {
             if (room.roomers.size() != 0) {
                 if (!room.isClean()) {
                     for (Student roomer : room.roomers) {
-                        roomer.getRemark();
+                        roomer.receiveRemark();
                         if (roomer.amountOfRemarks == MAX_REMARKS) {
                             wardenEvicted = roomer.evict(floor);
                         }
@@ -27,6 +27,7 @@ public class FloorWarden extends Student {
                     }
                 }
             }
+
         }
     }
 
